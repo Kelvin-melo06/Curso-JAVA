@@ -1,0 +1,69 @@
+package treinoJava5;
+
+public class Pessoa {
+    private String nome;
+    private String cpf;
+    private String rg;
+
+    public Pessoa() {};
+    public Pessoa(String nome, String cpf, String rg) {
+        this.nome = nome;
+        setCpf(cpf);
+        setRg(rg);
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public boolean setCpf(String cpf) {
+        cpf = cpf.replace(".", "").replace("-", "");
+
+        if(cpf.length() != 11){return false;}
+
+        if(cpf.matches("(\\d)\\1{10}")) return false;
+
+        // Calcula os dígitos verificadores
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+        int dig1 = 11 - (soma % 11);
+        if (dig1 >= 10) dig1 = 0;
+
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+        int dig2 = 11 - (soma % 11);
+        if (dig2 >= 10) dig2 = 0;
+
+        return dig1 == Character.getNumericValue(cpf.charAt(9)) &&
+                dig2 == Character.getNumericValue(cpf.charAt(10));
+    }
+
+    public boolean getRg(String rg) {
+        rg = rg.replace(".", " ").replace("-", " ");
+
+        if(rg.length() < 7 || rg.length() > 9){return false;}
+        return rg.matches("\\d+");
+    }
+
+    public String setRg(String rg) {
+        return rg;
+    }
+
+    public void imprimirPessoa(){
+        System.out.println("Nome: " + this.nome);
+        System.out.println("CPF: " + this.cpf);
+        System.out.println("RG: " + this.rg);
+    }
+}
