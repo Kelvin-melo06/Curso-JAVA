@@ -34,16 +34,41 @@ public class Pessoa {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public boolean setCpf(String cpf) {
+        cpf = cpf.replace(".", "").replace("-", "");
+
+        if(cpf.length() != 11){return false;}
+
+        if(cpf.matches("(\\d)\\1{10}")) return false;
+
+        // Calcula os dígitos verificadores
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+        int dig1 = 11 - (soma % 11);
+        if (dig1 >= 10) dig1 = 0;
+
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+        int dig2 = 11 - (soma % 11);
+        if (dig2 >= 10) dig2 = 0;
+
+        return dig1 == Character.getNumericValue(cpf.charAt(9)) &&
+                dig2 == Character.getNumericValue(cpf.charAt(10));
     }
 
     public String getRg() {
         return rg;
     }
 
-    public void setRg(String rg) {
-        this.rg = rg;
+    public boolean getRg(String rg) {
+        rg = rg.replace(".", " ").replace("-", " ");
+
+        if(rg.length() < 7 || rg.length() > 9){return false;}
+        return rg.matches("\\d+");
     }
 
     public void imprimirDados(){
