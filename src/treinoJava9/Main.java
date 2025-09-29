@@ -17,10 +17,10 @@ public class Main {
         int numeroProcurado = sc.nextInt();
 
         int indice = buscarNumero(arrayNumeros, numeroProcurado);
-        if(indice == -1){
+        if(indice != -1){
             System.out.println("Número " + numeroProcurado + " encontrado com sucesso na posição " + indice + "!");
         } else{
-            System.out.println("Número " + numeroProcurado + "Não encontrado!");
+            System.out.println("Número " + numeroProcurado + " Não foi encontrado!");
         }
         sc.close();
     }
