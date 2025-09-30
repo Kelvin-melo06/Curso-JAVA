@@ -7,9 +7,8 @@ public class Empregado {
     private String nomeEmpregado;
     private String cargoEmpregado;
     private double salarioEmpregado;
-    public int quantidadeEmpregados;
 
-    public Empregado(int quantidadeEmpregados) {
+    public Empregado() {
         totalEmpregados++;
         this.codigoEmpregado = totalEmpregados;
     };

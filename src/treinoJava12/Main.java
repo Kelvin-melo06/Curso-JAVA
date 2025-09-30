@@ -31,7 +31,6 @@ public class Main {
             String situacao = (media >= 6) ? "✅ Aprovado" : "❌ Reprovado";
             System.out.println("Aluno " + (i + 1) + " - Média: " + media + " - " + situacao);
         }
-
         sc.close();
     }
 }

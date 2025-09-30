@@ -1,7 +1,6 @@
 package treinoJava8;
 
 import treinoJava7.Empregado;
-
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
@@ -36,6 +35,39 @@ public class Main {
         for(Empregado e : empregados){
             e.imprimirDados();
             System.out.println("--------------------");
+        }
+
+        double somaSalario = 0;
+        for(Empregado e : empregados){
+            somaSalario += e.getSalarioEmpregado();
+        }
+
+        double salarioMedio = somaSalario / quantidadeUsuarios;
+        System.out.println("Salário médio: " + salarioMedio);
+
+
+        Empregado maiorSalario = empregados[0];
+        for(Empregado e : empregados){
+            if(e.getSalarioEmpregado() > maiorSalario.getSalarioEmpregado()){
+                maiorSalario = e;
+            }
+        }
+
+        System.out.println("\n=== Empregado com maior salário ===");
+        maiorSalario.imprimirDados();
+
+        System.out.println("\nDigite o codigo de empregado para aumentar o salário: ");
+        int codigoEmpregadoAumentoSalario = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Digite o percentual de aumento: ");
+        double percentualAumentoSalario = sc.nextDouble();
+
+        for(Empregado e : empregados){
+            if(e.getCodigoEmpregado() == codigoEmpregadoAumentoSalario){
+                e.setSalarioEmpregado(e.getSalarioEmpregado() * (1 + percentualAumentoSalario/100));
+                System.out.println("Novo Salário de " + e.getNomeEmpregado() + ": " + e.getSalarioEmpregado());
+                break;
+            }
         }
 
         Empregado.totalEmpregados();
